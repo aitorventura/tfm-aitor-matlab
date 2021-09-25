@@ -1,15 +1,16 @@
 
-
-s = 1002;
-for i = 1001:s
+images_to_evaluate = "1001#1012#1018#1026#1036#1057#1067#1098#1102#1104#1131#1163#1274#1278#1299#1375#1385#1409#1499#1501#1663";
+images_to_evaluate = images_to_evaluate.split('#');                     
+                     
+for i = 1:length(images_to_evaluate)
     fixations = struct;
     subjects = [];
     coordinates = [];
     orders = [];
     coordinates_x = [];
     coordinates_y = [];
-   imageName = strcat('data/pycharm-coordinates/', int2str(i));
-   disp(imageName);
+    disp(images_to_evaluate(i))
+   imageName = strcat('data/pycharm-coordinates/', images_to_evaluate(i));
    load(imageName,'eyedat') %load eye data cell array
    %fixationstats = ClusterFix(eyedat);
    %disp(length(fixationstats));
@@ -30,7 +31,7 @@ for i = 1001:s
    fixations.coord = transpose([coordinates_y;coordinates_x]);
    fixations.order = transpose(orders); 
    
-   save(sprintf('data/log-polar/%d.mat', i), 'fixations')
+   save(sprintf('data/log-polar/%s.mat', images_to_evaluate(i)), 'fixations')
 end
 
 

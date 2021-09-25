@@ -2,7 +2,7 @@
 scores = [];
 
 
-for i = 1001: 1002
+for i = 1001: 1001
     
     while true
        random_images = randperm(700);
@@ -44,13 +44,13 @@ for i = 1001: 1002
     drawnow;
     
 
-    Nsplits = 100;
+    Nsplits = 1000;
     stepSize = 0.1;
     toPlot = 0;
     jitter = 0;
 
-    [score,tp,fp] = AUC_shuffled(saliencyMap, fixationMap, otherMap, Nsplits, stepSize, toPlot)
-    %[score,tp,fp] = AUC_Borji(saliencyMap, fixationMap, Nsplits, stepSize, toPlot)
+    %[score,tp,fp] = AUC_shuffled(saliencyMap, fixationMap, otherMap, Nsplits, stepSize, toPlot)
+    [score,tp,fp] = AUC_Borji(saliencyMap, fixationMap, Nsplits, stepSize, toPlot)
     %[score,tp,fp,allthreshes] = AUC_Judd(saliencyMap, fixationMap, jitter, toPlot)
     %score = CC(saliencyMap, saliencyMap2)
     %score = NSS(saliencyMap, fixationMap)

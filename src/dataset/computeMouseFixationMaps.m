@@ -22,20 +22,21 @@ if ~exist(outputPath, 'dir')
 end
 
 for i = 1 : params.nStimuli
-    filename = params.stimuli{i};
-    img = im2double(imread(fullfile(params.path.stimuli, filename)));
-    [h w ~] = size(img);
-    map = zeros([h w]);
-    
-    display(i);
-    load(fullfile(inputPath, filename(1:end-4)));
-    disp(fixations.coord(:,2))
-    disp(fixations.coord(:,1))
-    ptInd = sub2ind([h w], fixations.coord(:,1), fixations.coord(:,2));
-    map(unique(ptInd)) = 1;
-    
-    map = imfilter(map, params.eye.gaussian, 0);
-    map = normalise(map);
-    imwrite(map, fullfile(outputPath, filename));
+    try
+        filename = params.stimuli{i};
+        img = im2double(imread(fullfile(params.path.stimuli, filename)));
+        [h w ~] = size(img);
+        map = zeros([h w]);
+
+        load(fullfile(inputPath, filename(1:end-4)));
+        ptInd = sub2ind([h w], fixations.coord(:,1), fixations.coord(:,2));
+        map(unique(ptInd)) = 1;
+
+        map = imfilter(map, params.eye.gaussian, 0);
+        map = normalise(map);
+        imwrite(map, fullfile(outputPath, filename));
+    catch
+        warning('Image not found');
+    end
 end
 end
