@@ -32,8 +32,16 @@ p = config;
 
 fprintf('Computing mouse fixation maps.\n');
 tic;
-computeMouseFixationMaps(p, 'log-polar');
+computeMouseFixationMaps(p, 'log-polar/low-quality');
 toc;
+
+fprintf('Computing mouse fixation maps.\n');
+tic;
+computeMouseFixationMaps(p, 'log-polar/high-quality');
+toc;
+
+
+
 fprintf('Computing fixation maps.\n');
 tic;
 computeFixationMaps(p);
